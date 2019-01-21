@@ -1,0 +1,52 @@
+<%# container for search bar and list of search results %>
+<% @favourites = Favourite.all %>
+<% fav = false %>
+<div class="search-container">
+  <%= form_tag("/search", method: "get") do %>
+    <%= text_field_tag(:query, params[:query]) %>
+    <%= button_tag :submit do %>
+      <span class='magnifying-glass'></span>
+    <% end %>
+  <% end %>
+  <% @results.each do |o| %>
+  <div class="search-result-container">
+    <span class="result-title">
+      <!-- Check if object is in favourites already (by title) -->
+      <% @favourites.each do |f| %>
+        <% if f.title == o[:title] %>
+          <% fav = true %>
+          <% break %>
+        <% end %>
+      <% end %>
+      <% if !fav %>
+        <%= link_to '★', add_star_path(title: o[:title], description: o[:description], query: params[:query]),  method: :post, class: "star" %>
+      <% else %>
+        <%= link_to '★', remove_star_path(title: o[:title], query: params[:query]),  method: :post, class: "star star-remove" %>
+        <% fav = false %>
+      <% end %>
+      <%= o[:title] %>
+    </span>
+    <span class="result-desc">
+      <%= o[:description].html_safe %>
+    </span>
+  </div>
+  <% end %>
+</div>
+<%# container for list of favourites, render if more than one fav %>
+<% if @favourites.count > 1 %>
+  <div class="background"></div> <!-- green background to fill bottom of screen -->
+  <div class="fav-wrapper">
+    <h1>Favourites</h1>
+    <% @favourites.each do |f| %>
+      <div class="fav-container">
+        <span class="result-title">
+          <%= link_to '★', remove_star_path(title: f[:title], query: params[:query]),  method: :post, class: "star star-remove" %>
+          <%= f[:title] %>
+        </span>
+        <span class="result-desc">
+          <%= f[:description].html_safe %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

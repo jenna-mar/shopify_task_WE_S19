@@ -1,0 +1,103 @@
+$main_green: #23995c;
+$font_gray: #333333;
+
+.star{
+  color: #aaa;
+  font-size: 1.2em;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.star-remove{
+  color: $main_green;
+}
+
+.content-container {
+  font-size: 2em;
+  .search-container{
+    background-color: #fff;
+    padding: 30px;
+    form {
+      display: flex;
+      input#query {
+        flex-grow: 1;
+        padding: 20px 15px;
+        font-size: 1em;
+        border: 2px solid #aaa;
+        border-radius: 5px;
+        margin-right: 30px;
+        color: $font_gray;
+      }
+      button {
+        background: $main_green;
+        border-radius: 5px;
+        height: 90px;
+        width: 90px;
+        border: none;
+        cursor: pointer;
+        span {
+          height: 30px;
+          width: 30px;
+          border-radius: 50px;
+          border: 7px solid white;
+          top: -5px;
+          right: -25px;
+          position: relative;
+          display: flex;
+          &:after {
+            content: "";
+            height: 7px;
+            width: 30px;
+            background: white;
+            position: relative;
+            top: 35px;
+            left: -22px;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+  .search-result-container, .fav-container{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 50px;
+    padding: 30px 0;
+    .result-desc{
+      width: 50%;
+      ul{
+        margin: 0;
+        padding: 0;
+      }
+      li{
+        padding-bottom: 30px;
+      }
+    }
+    .result-title{
+      width: 50%;
+      margin-right: 30px;
+      display: flex;
+      align-items: baseline;
+    }
+  }
+  .fav-wrapper{
+    background-color: #f7fefa;
+    padding: 30px;
+    h1{
+      color: $main_green;
+      margin: 0;
+      font-size: 2em;
+    }
+  }
+}
+.background{
+  background-color: #f7fefa;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
